@@ -3,6 +3,7 @@
     package="com.example.bikey">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-feature android:name="android.hardware.location.gps"/>
 
     <application
@@ -12,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="nb2mzfbdm8" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
