@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "764223412572",
+    "firebase_url": "https://biker-54c40.firebaseio.com",
+    "project_id": "biker-54c40",
+    "storage_bucket": "biker-54c40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764223412572:android:6f79578d0cb7854ea64999",
+        "android_client_info": {
+          "package_name": "com.mk.bikey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764223412572-j8n39ef9rc8jrk252agjrsurad0q5ja1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUtZtBAM2JF4TjTkbemvE38lhf6b7iOLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764223412572-j8n39ef9rc8jrk252agjrsurad0q5ja1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

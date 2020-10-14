@@ -3,30 +3,87 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/container_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <fragment
-            android:id="@+id/map"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:name="com.naver.maps.map.MapFragment"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            <fragment
+                android:id="@+id/map"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:name="com.naver.maps.map.MapFragment"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TextView
-            style="@style/ItalicBlackFifty"
-            android:id="@+id/speed"
+            <TextView
+                style="@style/ItalicBlackFifty"
+                android:id="@+id/speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="30dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:text="20"/>
+            
+            <ImageView
+                android:id="@+id/img_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_menu_24px"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/bg_oval_white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_start"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/bg_oval_green"
+                android:text="시작"
+                android:textColor="@color/white_100"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <Button
+                android:id="@+id/btn_stop"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/bg_oval_green"
+                android:text="종료"
+                android:textColor="@color/white_100"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="30dp"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            tools:text="20"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 </layout>

@@ -10,5 +10,13 @@
         android:id="@+id/mainMapFragment"
         android:name="com.mk.bikey.MainMapFragment"
         android:label="MainMapFragment"
-        tools:layout="@layout/fragment_main_map"/>
+        tools:layout="@layout/fragment_main_map">
+        <action
+            android:id="@+id/action_mainMapFragment_to_searchRouteFragment"
+            app:destination="@id/searchRouteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchRouteFragment"
+        android:name="com.mk.bikey.SearchRouteFragment"
+        android:label="SearchRouteFragment" />
 </navigation>
