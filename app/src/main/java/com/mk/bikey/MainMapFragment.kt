@@ -2,7 +2,6 @@ package com.mk.bikey
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import java.util.*
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -56,9 +55,9 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
         initMap()
         initLocationSource()
         setBinding()
-
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Route?>("route")
             ?.observe(viewLifecycleOwner, Observer {
+                Timber.d("loaded route = $it")
                 route = it
             })
     }
@@ -74,6 +73,7 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
                 startRouteMaking()
             }
             btnStop.setOnClickListener {
+                disposable?.dispose()
                 it.visibility = View.GONE
                 InputDialog.show(
                     fragmentManager = childFragmentManager,
@@ -118,12 +118,8 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
     private fun startRouteMaking() {
         disposable = Observable.interval(5000, TimeUnit.MILLISECONDS)
             .subscribeBy(
-                onNext = {
-                    lastLatLng?.let { latLngList.add(it) }
-                },
-                onError = {
-                    TODO("not implemented")
-                }
+                onNext = { lastLatLng?.let { latLngList.add(it) } },
+                onError = { Timber.e(it) }
             )
     }
 
@@ -137,18 +133,22 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
                 binding.speed.text = (it.speed * 3.6f).toInt().toString()
             }
 
-            route?.let {
-                clear()
-                path.coords = it.latlngList.map { temp ->
-                    com.naver.maps.geometry.LatLng(
-                        temp.latitude,
-                        temp.longitude
-                    )
+            try {
+                route?.let {
+                    clear()
+                    path.coords = it.latlngList.map { temp ->
+                        com.naver.maps.geometry.LatLng(
+                            temp.latitude,
+                            temp.longitude
+                        )
+                    }
+                    path.width = 10
+                    path.outlineWidth = 10
+                    path.color = Color.BLUE
+                    path.map = this
                 }
-                path.width = 10
-                path.outlineWidth = 10
-                path.color = Color.BLUE
-                path.map = this
+            } catch (e: Exception) {
+                Timber.e(e)
             }
         }
     }
