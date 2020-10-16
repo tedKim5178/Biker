@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.mk.bikey.databinding.FragmentMainMapBinding
@@ -38,6 +41,7 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
     private val latLngList: MutableList<LatLng> = mutableListOf()
     private var disposable: Disposable? = null
     private var route: Route? = null
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +50,8 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
     ): View? = FragmentMainMapBinding.inflate(inflater, container, false).run {
         binding = this
         // TODO(fix me)
+        firebaseAnalytics = Firebase.analytics
+
         navBinding = NavHeaderBinding.bind(binding.navView.getHeaderView(0))
         root
     }
@@ -79,6 +85,9 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
                     fragmentManager = childFragmentManager,
                     titleText = getString(R.string.input_course_dialog_title),
                     onConfirm = { inputText ->
+                        firebaseAnalytics.logEvent("course_created") {
+                            param("name", inputText)
+                        }
                         updateLatLngListToServer(inputText)
                     }
                 )
@@ -93,6 +102,16 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
                 binding.containerDrawer.close()
                 onRouteCreateClicked()
             }
+        }
+    }
+
+    /**
+     * Example
+     */
+    override fun onResume() {
+        super.onResume()
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
+            param(FirebaseAnalytics.Param.SCREEN_NAME, "MainMapFragment")
         }
     }
 
