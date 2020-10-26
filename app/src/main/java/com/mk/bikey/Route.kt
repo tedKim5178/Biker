@@ -8,5 +8,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Route(
     val name: String = "",
-    val latlngList: List<LatLng> = mutableListOf()
+    val latlngList: List<BikerLatLng> = mutableListOf()
 ) : Parcelable

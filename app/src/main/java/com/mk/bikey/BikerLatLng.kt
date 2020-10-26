@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Keep
 @Parcelize
-data class LatLng(
+data class BikerLatLng(
     val latitude: Double = 0.0,
     val longitude: Double = 0.0
 ) : Parcelable
