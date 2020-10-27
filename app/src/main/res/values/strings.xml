@@ -2,6 +2,8 @@
     <string name="app_name">Biker</string>
     <string name="load">불러오기</string>
     <string name="create">만들기</string>
+    <string name="history">나의 기록</string>
+    <string name="record">기록 측정</string>
     <string name="input_course_dialog_title">코스명을 입력하세요</string>
     <string name="input_nothing_toast">아무것도 입력하지 않았어요</string>
 </resources>

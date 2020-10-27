@@ -80,8 +80,56 @@
             android:gravity="center_vertical"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            app:layout_constraintStart_toEndOf="@+id/img_load"
+            app:layout_constraintStart_toEndOf="@+id/img_create"
             app:layout_constraintTop_toBottomOf="@id/tv_load"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/img_record"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_add_road_24px"
+            android:layout_marginStart="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_record"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_record"/>
+
+        <TextView
+            style="@style/NormalBlack15"
+            android:id="@+id/tv_record"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:text="@string/record"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            app:layout_constraintStart_toEndOf="@+id/img_record"
+            app:layout_constraintTop_toBottomOf="@id/tv_create"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/img_history"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_history_24px"
+            android:layout_marginStart="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_history"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_history"/>
+
+        <TextView
+            style="@style/NormalBlack15"
+            android:id="@+id/tv_history"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:text="@string/history"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            app:layout_constraintStart_toEndOf="@+id/img_history"
+            app:layout_constraintTop_toBottomOf="@id/tv_record"
             app:layout_constraintEnd_toEndOf="parent"
             />
 

@@ -97,6 +97,12 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
                 binding.containerDrawer.close()
                 onRouteCreateClicked()
             }
+            tvRecord.setOnClickListener {
+                TODO("not implemented")
+            }
+            tvHistory.setOnClickListener {
+                TODO("not implemented")
+            }
         }
     }
 
