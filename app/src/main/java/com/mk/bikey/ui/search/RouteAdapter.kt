@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mk.bikey.databinding.ListItemRouteBinding
+import com.mk.bikey.model.Route
 
 class RouteAdapter : ListAdapter<Route, RecyclerView.ViewHolder>(RouteDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

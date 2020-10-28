@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.ui.search
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.mk.bikey.model.Route
 
 class SearchRouteViewModel @ViewModelInject constructor() : ViewModel() {
 

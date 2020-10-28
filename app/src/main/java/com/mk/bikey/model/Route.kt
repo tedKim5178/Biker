@@ -1,7 +1,8 @@
-package com.mk.bikey
+package com.mk.bikey.model
 
 import android.os.Parcelable
 import androidx.annotation.Keep
+import com.mk.bikey.model.BikerLatLng
 import kotlinx.android.parcel.Parcelize
 
 @Keep

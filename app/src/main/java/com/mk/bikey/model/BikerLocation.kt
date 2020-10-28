@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.model
 
 data class BikerLocation(
     val latitude: Double,

@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.ui.main
 
 import android.graphics.Color
 import android.os.Bundle
@@ -10,8 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.mk.bikey.*
 import com.mk.bikey.databinding.FragmentMainMapBinding
 import com.mk.bikey.databinding.NavHeaderBinding
+import com.mk.bikey.model.BikerLocation
+import com.mk.bikey.model.Route
+import com.mk.bikey.ui.dialog.InputDialog
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
@@ -70,7 +74,9 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun initLocationSource() {
-        locationSource = FusedLocationSource(this, MainActivity.LOCATION_PERMISSION_REQUEST_CODE)
+        locationSource = FusedLocationSource(this,
+            MainActivity.LOCATION_PERMISSION_REQUEST_CODE
+        )
     }
 
     private fun setBinding() {
@@ -151,7 +157,11 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
             locationTrackingMode = LocationTrackingMode.Follow
             addOnLocationChangeListener {
                 mainMapViewModel.onLocationChange(
-                    BikerLocation(it.latitude, it.longitude, it.speed)
+                    BikerLocation(
+                        it.latitude,
+                        it.longitude,
+                        it.speed
+                    )
                 )
             }
             loadRoutePathIfExist()

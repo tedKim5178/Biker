@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.mk.bikey.support.FragmentArgumentDelegate
+import com.mk.bikey.R
 import com.mk.bikey.databinding.FragmentInputDialogBinding
 
 class InputDialog : DialogFragment() {
@@ -32,7 +34,8 @@ class InputDialog : DialogFragment() {
             btnConfirm.setOnClickListener {
                 val inputText = etInput.text.toString()
                 if (inputText.isEmpty()) {
-                    Toast.makeText(context, R.string.input_nothing_toast, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,
+                        R.string.input_nothing_toast, Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
                 onConfirm?.invoke(inputText)

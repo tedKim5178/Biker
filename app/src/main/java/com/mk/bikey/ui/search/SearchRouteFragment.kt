@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater

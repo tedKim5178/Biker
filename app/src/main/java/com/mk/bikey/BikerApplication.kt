@@ -3,6 +3,7 @@ package com.mk.bikey
 import android.app.Application
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.mk.bikey.support.DO_NOTHING
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -28,7 +29,9 @@ class FirebaseDebugsTree : Timber.DebugTree() {
             Log.ERROR -> {
                 t?.let { FirebaseCrashlytics.getInstance().recordException(it) }
             }
-            else -> { DO_NOTHING }
+            else -> {
+                DO_NOTHING
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.ui.main
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -10,6 +10,9 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.mk.bikey.model.BikerLatLng
+import com.mk.bikey.model.BikerLocation
+import com.mk.bikey.model.Route
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import timber.log.Timber
@@ -35,7 +38,12 @@ class MainMapViewModel @ViewModelInject constructor() : ViewModel() {
                 onNext = {
                     lastLocation.value?.let {
                         // TODO :: dependency?
-                        routeData.add(BikerLatLng(it.latitude, it.longitude))
+                        routeData.add(
+                            BikerLatLng(
+                                it.latitude,
+                                it.longitude
+                            )
+                        )
                     }
                 },
                 onError = {

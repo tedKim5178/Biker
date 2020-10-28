@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.ui.create
 
 import android.os.Bundle
 import android.view.LayoutInflater

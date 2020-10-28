@@ -1,4 +1,4 @@
-package com.mk.bikey
+package com.mk.bikey.model
 
 import android.os.Parcelable
 import androidx.annotation.Keep
