@@ -55,7 +55,7 @@ private class RouteDiffCallback : DiffUtil.ItemCallback<Route>() {
 
     override fun areContentsTheSame(oldItem: Route, newItem: Route): Boolean {
         // TODO
-        return true
+        return oldItem == newItem
     }
 
 }

@@ -5,15 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.mk.bikey.*
+import com.mk.bikey.MainActivity
+import com.mk.bikey.R
 import com.mk.bikey.databinding.FragmentMainMapBinding
 import com.mk.bikey.databinding.NavHeaderBinding
-import com.mk.bikey.model.BikerLocation
 import com.mk.bikey.model.Route
 import com.mk.bikey.ui.dialog.InputDialog
 import com.naver.maps.geometry.LatLng
@@ -52,7 +53,6 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
         initMap()
         initLocationSource()
         setBinding()
-        observeUi()
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Route?>("route")
             ?.observe(viewLifecycleOwner, Observer {
                 Timber.d("loaded route = $it")
@@ -74,13 +74,16 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun initLocationSource() {
-        locationSource = FusedLocationSource(this,
+        locationSource = FusedLocationSource(
+            this,
             MainActivity.LOCATION_PERMISSION_REQUEST_CODE
         )
     }
 
     private fun setBinding() {
         with(binding) {
+            vm = mainMapViewModel
+            lifecycleOwner = viewLifecycleOwner
             imgMenu.setOnClickListener {
                 containerDrawer.open()
             }
@@ -93,6 +96,15 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
                 it.visibility = View.GONE
                 showNameRouteDialog()
             }
+            btnRecordStart.setOnClickListener {
+                it.visibility = View.GONE
+                btnRecordStop.visibility = View.VISIBLE
+                mainMapViewModel.recordRoute()
+            }
+            btnRecordStop.setOnClickListener {
+                it.visibility = View.GONE
+                showNameRecordDialog()
+            }
         }
         with(navBinding) {
             tvLoad.setOnClickListener {
@@ -104,10 +116,11 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
                 onRouteCreateClicked()
             }
             tvRecord.setOnClickListener {
-                TODO("not implemented")
+                binding.containerDrawer.close()
+                binding.btnRecordStart.isVisible = true
             }
             tvHistory.setOnClickListener {
-                TODO("not implemented")
+                it.findNavController().navigate(R.id.action_mainMapFragment_to_recordFragment)
             }
         }
     }
@@ -123,14 +136,14 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
         )
     }
 
-    private fun observeUi() {
-        observeSpeedKph()
-    }
-
-    private fun observeSpeedKph() {
-        mainMapViewModel.speedKph.observe(viewLifecycleOwner, Observer {
-            binding.speed.text = it.toString()
-        })
+    private fun showNameRecordDialog() {
+        InputDialog.show(
+            fragmentManager = childFragmentManager,
+            titleText = getString(R.string.input_record_dialog_title),
+            onConfirm = { recordName ->
+                mainMapViewModel.saveRouteToDatabase(recordName)
+            }
+        )
     }
 
     private fun onRouteCreateClicked() {
@@ -156,13 +169,7 @@ class MainMapFragment : Fragment(), OnMapReadyCallback {
             locationOverlay.isVisible = true
             locationTrackingMode = LocationTrackingMode.Follow
             addOnLocationChangeListener {
-                mainMapViewModel.onLocationChange(
-                    BikerLocation(
-                        it.latitude,
-                        it.longitude,
-                        it.speed
-                    )
-                )
+                mainMapViewModel.onLocationChange(it)
             }
             loadRoutePathIfExist()
         }

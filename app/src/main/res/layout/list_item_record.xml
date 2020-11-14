@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="record"
+            type="com.mk.bikey.model.Record" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/NormalBlack15"
+            android:id="@+id/tv_record_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{record.title}"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            tools:text="두산위브파빌리온에서 한강으로 여행"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -14,9 +14,28 @@
         <action
             android:id="@+id/action_mainMapFragment_to_searchRouteFragment"
             app:destination="@id/searchRouteFragment" />
+        <action
+            android:id="@+id/action_mainMapFragment_to_recordFragment"
+            app:destination="@id/recordFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchRouteFragment"
         android:name="com.mk.bikey.ui.search.SearchRouteFragment"
         android:label="SearchRouteFragment" />
+    <fragment
+        android:id="@+id/recordFragment"
+        android:name="com.mk.bikey.ui.record.RecordFragment"
+        android:label="RecordFragment" >
+        <action
+            android:id="@+id/action_recordFragment_to_recordDetailFragment"
+            app:destination="@id/recordDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recordDetailFragment"
+        android:name="com.mk.bikey.ui.record.RecordDetailFragment"
+        android:label="RecordDetailFragment" >
+        <argument
+            android:name="record"
+            app:argType="com.mk.bikey.model.Record"/>
+    </fragment>
 </navigation>

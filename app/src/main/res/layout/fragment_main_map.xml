@@ -3,10 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="vm"
+            type="com.mk.bikey.ui.main.MainMapViewModel" />
+        <import type="com.mk.bikey.support.FloatExtensionsKt"/>
+    </data>
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/container_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -23,15 +31,108 @@
 
             <TextView
                 style="@style/ItalicBlackFifty"
-                android:id="@+id/speed"
+                android:id="@+id/tv_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:layout_marginStart="30dp"
                 android:gravity="center"
+                android:text="@{String.valueOf(FloatExtensionsKt.mpsToKph(vm.speed))}"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:text="20"/>
+
+            <TextView
+                style="@style/NormalBlack20"
+                android:id="@+id/tv_avg_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/avg_speed_label"
+                app:layout_constraintTop_toBottomOf="@+id/tv_speed"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                style="@style/NormalBlack20"
+                android:id="@+id/tv_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@{String.valueOf(FloatExtensionsKt.mpsToKph(vm.record.avgSpeed))}"
+                app:layout_constraintTop_toTopOf="@+id/tv_avg_label"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_avg_label"
+                app:layout_constraintStart_toEndOf="@+id/tv_avg_label"
+                tools:text="55"/>
+
+            <TextView
+                style="@style/NormalBlack20"
+                android:id="@+id/tv_max_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/max_speed_label"
+                app:layout_constraintTop_toBottomOf="@+id/tv_avg"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                style="@style/NormalRed20"
+                android:id="@+id/tv_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@{String.valueOf(FloatExtensionsKt.mpsToKph(vm.record.maxSpeed))}"
+                app:layout_constraintTop_toTopOf="@+id/tv_max_label"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_max_label"
+                app:layout_constraintStart_toEndOf="@+id/tv_max_label"
+                tools:text="55"/>
+
+            <TextView
+                style="@style/NormalBlack20"
+                android:id="@+id/tv_distance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/distance_label"
+                app:layout_constraintTop_toBottomOf="@+id/tv_max_label"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                style="@style/NormalBlack20"
+                android:id="@+id/tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@{String.format(@string/distance_kilometers, String.valueOf(FloatExtensionsKt.mToKm(vm.record.distance)))}"
+                app:layout_constraintTop_toTopOf="@+id/tv_distance_label"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_distance_label"
+                app:layout_constraintStart_toEndOf="@+id/tv_distance_label"
+                tools:text="55"/>
+
+            <TextView
+                style="@style/NormalBlack20"
+                android:id="@+id/tv_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/time_label"
+                app:layout_constraintTop_toBottomOf="@+id/tv_distance_label"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                style="@style/NormalBlack20"
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@{String.format(@string/time_minutes, String.valueOf(vm.record.time))}"
+                app:layout_constraintTop_toTopOf="@+id/tv_time_label"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_time_label"
+                app:layout_constraintStart_toEndOf="@+id/tv_time_label"
+                tools:text="55"/>
             
             <ImageView
                 android:id="@+id/img_menu"
@@ -74,6 +175,45 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
+
+            <Button
+                android:id="@+id/btn_record_start"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/bg_oval_green"
+                android:text="시작"
+                android:textColor="@color/white_100"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <Button
+                android:id="@+id/btn_record_stop"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/bg_oval_green"
+                android:text="종료"
+                android:textColor="@color/white_100"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="tv_avg,tv_avg_label,tv_max,tv_max_label,tv_distance,tv_distance_label,tv_time,tv_time_label"
+                app:visibleOrGone="@{vm.recordStart}"
+                tools:visibility="visible"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="record"
+            type="com.mk.bikey.model.Record" />
+        <import type="com.mk.bikey.support.FloatExtensionsKt"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            style="@style/NormalBlack20"
+            android:id="@+id/tv_avg_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/avg_speed_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            style="@style/NormalBlack20"
+            android:id="@+id/tv_avg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@{String.valueOf(FloatExtensionsKt.mpsToKph(record.avgSpeed))}"
+            app:layout_constraintTop_toTopOf="@+id/tv_avg_label"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_avg_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="55"/>
+
+        <TextView
+            style="@style/NormalBlack20"
+            android:id="@+id/tv_max_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/max_speed_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_avg"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            style="@style/NormalBlack20"
+            android:id="@+id/tv_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@{String.valueOf(FloatExtensionsKt.mpsToKph(record.maxSpeed))}"
+            app:layout_constraintTop_toTopOf="@+id/tv_max_label"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_max_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="55"/>
+
+        <TextView
+            style="@style/NormalBlack20"
+            android:id="@+id/tv_distance_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/distance_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_max_label"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            style="@style/NormalBlack20"
+            android:id="@+id/tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@{String.format(@string/distance_kilometers, String.valueOf(FloatExtensionsKt.mToKm(record.distance)))}"
+            app:layout_constraintTop_toTopOf="@+id/tv_distance_label"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_distance_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="55"/>
+
+        <TextView
+            style="@style/NormalBlack20"
+            android:id="@+id/tv_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/time_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_distance_label"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            style="@style/NormalBlack20"
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@{String.format(@string/time_minutes, String.valueOf(record.time))}"
+            app:layout_constraintTop_toTopOf="@+id/tv_time_label"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_time_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="55"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

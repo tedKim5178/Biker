@@ -5,5 +5,12 @@
     <string name="history">나의 기록</string>
     <string name="record">기록 측정</string>
     <string name="input_course_dialog_title">코스명을 입력하세요</string>
+    <string name="input_record_dialog_title">기록명을 입력하세요</string>
     <string name="input_nothing_toast">아무것도 입력하지 않았어요</string>
+    <string name="avg_speed_label">평균속도</string>
+    <string name="max_speed_label">최고속도</string>
+    <string name="distance_label">거리</string>
+    <string name="time_label">시간</string>
+    <string name="time_minutes">%s 분</string>
+    <string name="distance_kilometers">%s KM</string>
 </resources>
