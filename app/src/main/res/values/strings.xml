@@ -4,6 +4,8 @@
     <string name="create">만들기</string>
     <string name="history">나의 기록</string>
     <string name="record">기록 측정</string>
+    <string name="history_list_label">기록 목록</string>
+    <string name="history_detail_label">기록 상세</string>
     <string name="input_course_dialog_title">코스명을 입력하세요</string>
     <string name="input_record_dialog_title">기록명을 입력하세요</string>
     <string name="input_nothing_toast">아무것도 입력하지 않았어요</string>

@@ -22,6 +22,7 @@ import com.mk.bikey.repository.RecordRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -45,6 +46,7 @@ class MainMapViewModel @ViewModelInject constructor(
         location?.speed?.toInt() ?: 0
     }
 
+    private var recordDisposable: Disposable? = null
     private val _record = MutableLiveData<Record>()
     val record: LiveData<Record> = _record
     private val _recordStart = MutableLiveData<Boolean>()
@@ -74,7 +76,7 @@ class MainMapViewModel @ViewModelInject constructor(
 
     fun recordRoute() {
         startLocation = lastLocation.value
-        Observable.interval(0, 3000, TimeUnit.MILLISECONDS)
+        recordDisposable = Observable.interval(0, 3000, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {
@@ -127,6 +129,7 @@ class MainMapViewModel @ViewModelInject constructor(
     private var maxSpeed = 0f
 
     fun saveRouteToDatabase(title: String) {
+        recordDisposable?.dispose()
         _recordStart.value = false
         val record = _record.value?.copy(title = title)
         record?.let {

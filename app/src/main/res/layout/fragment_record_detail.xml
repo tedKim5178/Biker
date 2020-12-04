@@ -14,6 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.mk.bikey.ui.custom.BackWithTextView
+            android:id="@+id/v_header"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            app:title="@{@string/history_detail_label}"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <TextView
             style="@style/NormalBlack20"
             android:id="@+id/tv_avg_label"
@@ -23,7 +30,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/avg_speed_label"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/v_header"/>
 
         <TextView
             style="@style/NormalBlack20"

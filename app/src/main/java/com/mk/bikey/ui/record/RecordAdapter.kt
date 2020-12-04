@@ -30,7 +30,7 @@ class RecordAdapter : ListAdapter<Record, RecyclerView.ViewHolder>(RecordDiffCal
         private lateinit var item: Record
 
         init {
-            binding.tvRecordName.setOnClickListener {
+            binding.tvRecordTitle.setOnClickListener {
                 with(it.findNavController()) {
                     navigate(
                         RecordFragmentDirections.actionRecordFragmentToRecordDetailFragment(

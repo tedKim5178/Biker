@@ -23,6 +23,9 @@ data class Record(
      */
     val distance: Float,
     val time: Long,
+    /**
+     * minutes
+     */
     val latLngList: List<BikerLatLng>,
     val title: String = ""
 ) : Parcelable

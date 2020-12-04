@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.mk.bikey.model.Route
+import timber.log.Timber
 
 class SearchRouteViewModel @ViewModelInject constructor() : ViewModel() {
 
@@ -21,6 +22,7 @@ class SearchRouteViewModel @ViewModelInject constructor() : ViewModel() {
     fun fetch() {
         val listener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
+                Timber.d("error $error")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
